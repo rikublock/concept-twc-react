@@ -1,0 +1,12 @@
+version: "3.9"
+services:
+  twc-nginx:
+    image: nginx:1.23-alpine
+    container_name: twc-nginx
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "8080:80"
+    volumes:
+      - "./build:/usr/share/nginx/html:ro"
+

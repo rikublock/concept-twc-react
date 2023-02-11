@@ -35,3 +35,11 @@ See the section about [deployment](https://create-react-app.dev/docs/deployment/
 ```shell
 yarn build
 ```
+
+Optionally, the build can be tested with nginx (in Docker).
+Open [http://localhost:8080](http://localhost:8080) to view it in your browser.
+
+```shell
+./run_ngnix.sh
+```
+
