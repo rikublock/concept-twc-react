@@ -1,4 +1,5 @@
 const path = require("path");
+const CopyPlugin = require("copy-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
@@ -21,6 +22,15 @@ module.exports = {
       template: path.join(__dirname, "public", "index.html"),
       favicon: path.join(__dirname, "public", "favicon.ico"),
     }),
+    // FIXME: Not sure how else to include these in the package
+    new CopyPlugin({
+      patterns: [
+        { 
+          from: "node_modules/@trustwallet/wallet-core/dist/lib/wallet-core.wasm",
+          to: "[name][ext]",
+        },
+      ],
+    }),
   ],
   module: {
     rules: [
@@ -40,11 +50,22 @@ module.exports = {
       },
       {
         test: /\.(png|svg|jpg|jpeg|gif|ico)$/i,
-        type: 'asset/resource',
+        type: "asset/resource",
+      },
+      {
+        test: /\.wasm$/i,
+        type: "asset/resource",
       },
     ],
   },
   resolve: {
     extensions: [".js", ".jsx"],
-  },
+    fallback: {
+      buffer: require.resolve("buffer"),
+      crypto: require.resolve("crypto-browserify"),
+      path: require.resolve("path-browserify"),
+      stream: require.resolve("stream-browserify"),
+      fs: false,
+    },
+  },  
 };

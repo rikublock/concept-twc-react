@@ -43,3 +43,6 @@ Open [http://localhost:8080](http://localhost:8080) to view it in your browser.
 ./run_ngnix.sh
 ```
 
+## Open Issues
+- https://github.com/webpack/webpack/issues/7352
+- not sure, if secrets are managed securely in tabs/browser memory
